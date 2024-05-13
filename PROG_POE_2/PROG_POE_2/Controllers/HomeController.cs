@@ -17,7 +17,7 @@ namespace PROG_POE_2.Controllers
         {
             return View();
         }
-        //  Simple comment
+        
         public IActionResult Privacy()
         {
             return View();
