@@ -23,6 +23,7 @@ namespace PROG_POE_2.Controllers
         {
             //This allows to get the current user id
             ViewData["UserID"] = _userManager.GetUserId(this.User);
+            TempData["UserID"] = _userManager.GetUserId(this.User);
             return View();
         }
 
