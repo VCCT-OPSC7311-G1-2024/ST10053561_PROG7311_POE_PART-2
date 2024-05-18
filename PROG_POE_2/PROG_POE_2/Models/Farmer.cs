@@ -15,6 +15,7 @@ namespace PROG_POE_2.Models
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Surname")]
         [Column(TypeName = "nvarchar(100)")]
         public string LastName { get; set; }
 
