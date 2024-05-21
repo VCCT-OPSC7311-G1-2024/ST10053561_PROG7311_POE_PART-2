@@ -20,13 +20,28 @@ namespace PROG_POE_2.Controllers
 			_context = context;
 		}
 
-		// GET: Products
+
+
+        // GET: Products
         public async Task<IActionResult> Display()
         {
-            return View(await _context.Products.ToListAsync());
+            // Retrieve the farmer's ID from the session
+            var farmerId = HttpContext.Session.GetInt32("FarmerId");
+            if (!farmerId.HasValue)
+            {
+                // Handle the case where the farmer is not logged in
+                return Redirect("/Identity/Account/Login");
+            }
+
+            // Filter the products based on the farmer's ID
+            var products = await _context.Products
+                .Where(p => p.FarmerID == farmerId.Value)
+                .ToListAsync();
+
+            return View(products);
         }
 
-
+    
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
 		{
@@ -103,43 +118,63 @@ namespace PROG_POE_2.Controllers
 			return View(product);
 		}
 
-		// POST: Products/Edit/5
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Type,description,ProductionDate,FarmerID")] Product product)
+        // POST: Products/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Type,description,ProductionDate")] Product product)
         {
             if (id != product.ProductID)
-			{
-				return NotFound();
-			}
+            {
+                return NotFound();
+            }
 
-			if (ModelState.IsValid)
-			{
-				try
-				{
-					_context.Update(product);
-					await _context.SaveChangesAsync();
-				}
-				catch (DbUpdateConcurrencyException)
-				{
-					if (!ProductExists(product.ProductID))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
-				}
-				return RedirectToAction(nameof(Display));
-			}
-			return View(product);
-		}
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingProduct = await _context.Products.FirstOrDefaultAsync(p => p.ProductID == id);
+                    if (existingProduct == null)
+                    {
+                        return NotFound();
+                    }
 
-		// GET: Products/Delete/5
-		public async Task<IActionResult> Delete(int? id)
+                    // Retrieve the farmer's ID from the session
+                    var farmerId = HttpContext.Session.GetInt32("FarmerId");
+                    if (!farmerId.HasValue)
+                    {
+                        // Handle the case where the farmer is not logged in
+                        return Redirect("/Identity/Account/Login");
+                    }
+
+                    existingProduct.Name = product.Name;
+                    existingProduct.Type = product.Type;
+                    existingProduct.description = product.description;
+                    existingProduct.ProductionDate = product.ProductionDate;
+                    existingProduct.FarmerID = farmerId.Value;
+
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductExists(product.ProductID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Display));
+            }
+            return View(product);
+        }
+
+
+        // GET: Products/Delete/5
+        public async Task<IActionResult> Delete(int? id)
 		{
 			if (id == null)
 			{
