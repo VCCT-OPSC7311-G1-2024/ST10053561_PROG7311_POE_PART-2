@@ -24,6 +24,10 @@ namespace PROG_POE_2.Models
         [Column(TypeName = "nvarchar(150)")]
         public string description { get; set; }
 
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime ProductionDate { get; set; }
+
         public int FarmerID { get; set; }
     }
 }

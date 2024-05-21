@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "963dscM5hI5e3FnimN17YRgdgpwwwLR3JuxaJSRHUDxfcLNpV30mahm0tl2aRDXBKOIrcBbun+ikwBsGgaPRsw==",
+  "dgSpecHash": "3mA2xmxMGegd5wW/k1Nn86oXZThlJR6abPpse+4DtMfq8wZvpEoPdBlspw+xc8W9Td5PTApHv+DRsE0Ib8Oc7Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\vicky\\OneDrive - ADvTECH Ltd\\Varsity college\\Third Year\\PROG7311\\POE\\Part 2\\ST10053561_PROG7311_POE_PART-2\\PROG_POE_2\\PROG_POE_2\\PROG_POE_2.csproj",
   "expectedPackageFiles": [
@@ -89,6 +89,7 @@
     "C:\\Users\\vicky\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.5\\microsoft.entityframeworkcore.tools.8.0.5.nupkg.sha512",
     "C:\\Users\\vicky\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\vicky\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.0\\microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
+    "C:\\Users\\vicky\\.nuget\\packages\\microsoft.extensions.caching.sqlserver\\8.0.4\\microsoft.extensions.caching.sqlserver.8.0.4.nupkg.sha512",
     "C:\\Users\\vicky\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\vicky\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\vicky\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",

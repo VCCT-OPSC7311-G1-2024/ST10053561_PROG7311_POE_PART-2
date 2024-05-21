@@ -19,7 +19,7 @@
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Type" class="control-label font-weight-bold"></label>
+                    <label asp-for="Type" class="control-label font-weight-bold">Category</label>
                     <input asp-for="Type" class="form-control shadow-input" />
                     <span asp-validation-for="Type" class="text-danger"></span>
                 </div>
@@ -27,6 +27,11 @@
                     <label asp-for="description" class="control-label font-weight-bold"></label>
                     <input asp-for="description" class="form-control shadow-input" />
                     <span asp-validation-for="description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductionDate" class="control-label font-weight-bold">Production Date</label>
+                    <input asp-for="ProductionDate" type="date" class="form-control shadow-input" />
+                    <span asp-validation-for="ProductionDate" class="text-danger"></span>
                 </div>
                 <div class="form-group mt-4 mb-3 text-center">
                     <input type="submit" value="Create" class="btn btn-primary btn-lg shadow-btn mr-2" />

@@ -56,7 +56,7 @@ namespace PROG_POE_2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Name,Type,description,FarmerID")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductID,Name,Type,description,ProductionDate,FarmerID")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -108,9 +108,9 @@ namespace PROG_POE_2.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Type,description,FarmerID")] Product product)
-		{
-			if (id != product.ProductID)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Type,description,ProductionDate,FarmerID")] Product product)
+        {
+            if (id != product.ProductID)
 			{
 				return NotFound();
 			}

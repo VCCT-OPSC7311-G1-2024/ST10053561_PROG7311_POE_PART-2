@@ -21,10 +21,16 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = true;
 });
 
+builder.Services.AddDistributedSqlServerCache(options =>
+{
+    options.ConnectionString = builder.Configuration.GetConnectionString("Login_RegContextConnection");
+    options.SchemaName = "dbo";
+    options.TableName = "SessionData";
+});
+
 builder.Services.AddSession(options =>
 {
-    // Set a longer timeout for testing.
-    options.IdleTimeout = TimeSpan.FromMinutes(60); 
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

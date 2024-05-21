@@ -25,6 +25,9 @@
             <th>
                     @Html.DisplayNameFor(model => model.description)
             </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.ProductionDate)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,6 +46,9 @@
                 </td>
                 <td>
                         @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.ProductionDate)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-warning btn-sm shadow-btn">Edit</a> |
