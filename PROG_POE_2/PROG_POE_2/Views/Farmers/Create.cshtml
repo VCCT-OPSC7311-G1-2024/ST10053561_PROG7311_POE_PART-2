@@ -45,6 +45,19 @@
                 </div>
 
                 <div class="form-group">
+                    <label asp-for="Username" class="control-label font-weight-bold"></label>
+                    <input asp-for="Username" class="form-control shadow-input" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label font-weight-bold"></label>
+                    <input asp-for="Password" class="form-control shadow-input" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
                     <label asp-for="Date" class="control-label font-weight-bold"></label>
                     <input asp-for="Date" class="form-control shadow-input" type="date" />
                     <span asp-validation-for="Date" class="text-danger"></span>
@@ -60,7 +73,9 @@
 </div>
 
 @section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
 
 @section Styles {
@@ -74,9 +89,9 @@
             margin-bottom: 30px;
         }
 
-        .header h1 {
-            color: #343a40;
-        }
+            .header h1 {
+                color: #343a40;
+            }
 
         .form-3d {
             background-color: #ffffff;
@@ -86,29 +101,29 @@
             transition: transform 0.3s;
         }
 
-        .form-3d:hover {
-            transform: translateY(-5px);
-        }
+            .form-3d:hover {
+                transform: translateY(-5px);
+            }
 
-        .form-3d .form-control {
-            border-radius: 5px;
-            border: 1px solid #ced4da;
-            box-shadow: none;
-        }
+            .form-3d .form-control {
+                border-radius: 5px;
+                border: 1px solid #ced4da;
+                box-shadow: none;
+            }
 
-        .form-3d .form-control:focus {
-            border-color: #80bdff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
+                .form-3d .form-control:focus {
+                    border-color: #80bdff;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                }
 
         .shadow-input {
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
             transition: box-shadow 0.3s;
         }
 
-        .shadow-input:focus {
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+            .shadow-input:focus {
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
 
         .btn-lg {
             padding: 10px 20px;
@@ -121,9 +136,9 @@
             transition: box-shadow 0.3s;
         }
 
-        .shadow-btn:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+            .shadow-btn:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
     </style>
 }
 

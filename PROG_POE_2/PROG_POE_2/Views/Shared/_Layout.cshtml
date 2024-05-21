@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@inject SignInManager<ApplicationUser> SignInManager
+@using PROG_POE_2.Areas.Identity.Data
+@using PROG_POE_2.Data
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,21 +25,40 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Farmers" asp-action="Create">Create Farmer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Farmers" asp-action="Index">View Farmers</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <partial name="_LoginPartial" />
+                    <ul class="navbar-nav me-auto justify-content-center w-100">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Farmers" asp-action="Create">Create Farmer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Farmers" asp-action="Display">View Farmers</a>
+                            </li>
+                        }
+                        @{
+                            var farmerId = Context.Session.GetInt32("FarmerId");
+                        }
+
+                        @if (farmerId.HasValue)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Products" asp-action="Create">Create Product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Products" asp-action="Display">View Products</a>
+                            </li>
+                        }
+
+                        <ul class="navbar-nav ms-auto">
+                            <partial name="_LoginPartial" />
+                        </ul>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -49,5 +74,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

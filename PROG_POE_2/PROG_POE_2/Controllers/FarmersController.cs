@@ -28,8 +28,19 @@ namespace PROG_POE_2.Controllers
         // GET: Farmers
         public async Task<IActionResult> Index()
         {
+            var farmerId = HttpContext.Session.GetInt32("FarmerId");
+            var isFarmer = farmerId.HasValue && await _context.Farmers.AnyAsync(f => f.Id == farmerId.Value);
+            ViewBag.IsFarmer = isFarmer;
             return View(await _context.Farmers.ToListAsync());
         }
+
+
+        // GET: Farmers/Display
+        public async Task<IActionResult> Display()
+        {
+            return View(await _context.Farmers.ToListAsync());
+        }
+
 
         // GET: Farmers/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -55,10 +66,9 @@ namespace PROG_POE_2.Controllers
             return View();
         }
 
-        // POST: Farmers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,LastName,Location,Contact,Date")] Farmer farmer)
+        public async Task<IActionResult> Create([Bind("Id,Name,LastName,Location,Contact,Date,Username,Password")] Farmer farmer)
         {
             // Get the current user id from LoginUser and assign it to the EmployeeID property.
             var userId = _userManager.GetUserId(this.User);
@@ -75,6 +85,10 @@ namespace PROG_POE_2.Controllers
 
             // Get the current user id and assign it to the EmployeeID property.
             farmer.EmployeeID = userId;
+
+            // Hash the password
+            var passwordHasher = new PasswordHasher<Farmer>();
+            farmer.PasswordHash = passwordHasher.HashPassword(farmer, farmer.Password);
 
             // Clear the model state
             ModelState.Clear();
@@ -103,6 +117,7 @@ namespace PROG_POE_2.Controllers
 
 
 
+
         // GET: Farmers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -124,6 +139,7 @@ namespace PROG_POE_2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LastName,Location,Contact,Date")] Farmer farmer)
         {
+
             if (id != farmer.Id)
             {
                 return NotFound();

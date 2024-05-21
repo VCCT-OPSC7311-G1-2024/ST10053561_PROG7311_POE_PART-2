@@ -1,17 +1,23 @@
-﻿@model PROG_POE_2.Models.Farmer
+﻿@model PROG_POE_2.Models.Product
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="header">Farmer Details</h1>
+<h1 class="header">Product Details</h1>
 
 <div class="card shadow-sm mb-4">
     <div class="card-body">
-        <h4 class="card-title">Farmer</h4>
+        <h4 class="card-title">Product</h4>
         <hr />
         <dl class="row">
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.FarmerID)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FarmerID)
+            </dd>
             <dt class="col-sm-3 font-weight-bold">
                 @Html.DisplayNameFor(model => model.Name)
             </dt>
@@ -19,36 +25,25 @@
                 @Html.DisplayFor(model => model.Name)
             </dd>
             <dt class="col-sm-3 font-weight-bold">
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.Type)
             </dt>
             <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.LastName)
+                @Html.DisplayFor(model => model.Type)
             </dd>
             <dt class="col-sm-3 font-weight-bold">
-                @Html.DisplayNameFor(model => model.Location)
+                @Html.DisplayNameFor(model => model.description)
             </dt>
             <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Location)
+                @Html.DisplayFor(model => model.description)
             </dd>
-            <dt class="col-sm-3 font-weight-bold">
-                @Html.DisplayNameFor(model => model.Contact)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Contact)
-            </dd>
-            <dt class="col-sm-3 font-weight-bold">
-                @Html.DisplayNameFor(model => model.Date)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Date)
-            </dd>
+            
         </dl>
     </div>
 </div>
 
 <div class="text-center">
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary shadow-btn">Edit</a>
-    <a asp-action="Index" class="btn btn-secondary shadow-btn ml-2">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.ProductID" class="btn btn-primary shadow-btn">Edit</a>
+    <a asp-action="Display" class="btn btn-secondary shadow-btn ml-2">Back to List</a>
 </div>
 
 @section Styles {
@@ -72,9 +67,9 @@
             transition: box-shadow 0.3s;
         }
 
-            .shadow-btn:hover {
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            }
+        .shadow-btn:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
 
         .font-weight-bold {
             font-weight: 700 !important;

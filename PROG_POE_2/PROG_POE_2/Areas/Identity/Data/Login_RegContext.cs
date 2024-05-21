@@ -9,6 +9,7 @@ namespace PROG_POE_2.Data;
 public class Login_RegContext : IdentityDbContext<ApplicationUser>
 {
     public DbSet<Farmer> Farmers { get; set; }
+    public DbSet<Product> Products { get; set; }
 
     public Login_RegContext(DbContextOptions<Login_RegContext> options)
         : base(options)
