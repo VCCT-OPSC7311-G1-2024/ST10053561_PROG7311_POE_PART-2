@@ -24,6 +24,21 @@ namespace PROG_POE_2.Controllers
             this._userManager = userManager;
         }
 
+        public IActionResult FarmingHub()
+        {
+            return View();
+        }
+
+        public IActionResult Marketplace()
+        {
+            return View();
+        }
+
+        public IActionResult Education()
+        {
+            return View();
+        }
+
 
         // GET: Farmers
         public async Task<IActionResult> Index()
@@ -103,7 +118,7 @@ namespace PROG_POE_2.Controllers
 
                 _context.Add(farmer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), "Home");
             }
             var errors = ModelState.SelectMany(x => x.Value.Errors.Select(e => e.ErrorMessage));
             foreach (var error in errors)
@@ -112,11 +127,6 @@ namespace PROG_POE_2.Controllers
             }
             return View(farmer);
         }
-
-
-
-
-
 
         // GET: Farmers/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -198,7 +208,7 @@ namespace PROG_POE_2.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Display));
         }
 
         private bool FarmerExists(int id)

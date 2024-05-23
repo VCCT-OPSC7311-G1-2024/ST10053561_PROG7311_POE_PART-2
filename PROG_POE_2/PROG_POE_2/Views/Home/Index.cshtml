@@ -2,7 +2,129 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome To Agri-Energy Connect</h1>
-    @* <p>Current UserID : @ViewData["UserID"]</p> *@
+@section Styles {
+    <style>
+        .welcome-header {
+            background-color: #f8f9fa;
+            padding: 30px 0;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+            .welcome-header h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+                color: #007bff;
+            }
+
+        .content-section {
+            margin-top: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
+
+            .card .card-body {
+                padding: 20px;
+            }
+
+            .card h5 {
+                font-size: 1.25rem;
+                font-weight: bold;
+                color: #343a40;
+            }
+
+            .card p {
+                color: #6c757d;
+            }
+
+            .card .btn-primary {
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+
+                .card .btn-primary:hover {
+                    background-color: #0056b3;
+                    border-color: #0056b3;
+                }
+    </style>
+}
+
+<div class="welcome-header text-center">
+    <h1>Welcome To Agri-Energy Connect</h1>
+    <p>Your gateway to sustainable farming and green energy solutions</p>
+</div>
+
+<div class="container content-section">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Create Farmer Profile</h5>
+                    <p class="card-text">Add new farmer profiles to the system with essential details.</p>
+                    <a href="@Url.Action("Create", "Farmers")" class="btn btn-primary">Create Farmer</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">View Farmers</h5>
+                    <p class="card-text">View and manage farmer profiles and their details.</p>
+                    <a href="@Url.Action("Display", "Farmers")" class="btn btn-primary">View Farmers</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Farmer Products</h5>
+                    <p class="card-text">View products based on farmers and filter by criteria.</p>
+                    <a href="@Url.Action("SelectFarmer", "Home")" class="btn btn-primary">View Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Sustainable Farming Hub</h5>
+                <p class="card-text">Access resources on sustainable farming practices and collaborate with other farmers.</p>
+                <a href="@Url.Action("FarmingHub", "Home")" class="btn btn-primary">Go to Hub</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Green Energy Marketplace</h5>
+                <p class="card-text">Explore green energy solutions tailored for agricultural needs.</p>
+                <a href="@Url.Action("Marketplace", "Home")" class="btn btn-primary">Visit Marketplace</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Educational Resources</h5>
+                <p class="card-text">Participate in online courses, webinars, and workshops on green energy in agriculture.</p>
+                <a href="@Url.Action("Education", "Home")" class="btn btn-primary">Access Resources</a>
+            </div>
+        </div>
+    </div>
 </div>

@@ -23,11 +23,33 @@ namespace PROG_POE_2.Controllers
             this._context = context;
         }
 
+        public IActionResult FarmingHub()
+        {
+            return View();
+        }
+
+        public IActionResult Marketplace()
+        {
+            return View();
+        }
+
+        public IActionResult Education()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> AllProducts(int id)
         {
             var products = await _context.Products.Where(p => p.FarmerID == id).ToListAsync();
+            if (products.Count > 0)
+            {
+                var farmerId = products[0].FarmerID;
+                var farmer = await _context.Farmers.FindAsync(farmerId);
+                ViewBag.FarmerUsername = farmer?.Username;
+            }
             return View("FarmerProducts", products);
         }
+
 
 
         public async Task<IActionResult> SelectFarmer()
@@ -64,11 +86,16 @@ namespace PROG_POE_2.Controllers
                 query = query.Where(p => p.ProductionDate <= endDate.Value);
             }
 
-            return View("FarmerProducts", await query.ToListAsync());
+            var products = await query.ToListAsync();
+            if (products.Count > 0)
+            {
+                var farmerId = products[0].FarmerID;
+                var farmer = await _context.Farmers.FindAsync(farmerId);
+                ViewBag.FarmerUsername = farmer?.Username;
+            }
+
+            return View("FarmerProducts", products);
         }
-
-
-
 
 
         public IActionResult Index()

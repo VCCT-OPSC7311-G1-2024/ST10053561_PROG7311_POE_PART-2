@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewData["Title"] = "FarmingHub";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Sustainable Farming Hub";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Sustainable Farming Hub</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <img src="@Url.Content("~/Images/Best Practices in Sustainable Farming.jpg")" class="card-img-top" alt="Sustainable Farming">
+                <div class="card-body">
+                    <h5 class="card-title">Best Practices in Sustainable Farming</h5>
+                    <p class="card-text">Learn about organic farming techniques, water conservation methods, and soil health maintenance.</p>
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <img src="@Url.Content("~/Images/Collaborate with Other Farmers.jpg")" class="card-img-top" alt="Collaborate with Farmers">
+                <div class="card-body">
+                    <h5 class="card-title">Collaborate with Other Farmers</h5>
+                    <p class="card-text">Join forums and discussion boards to seek advice, share experiences, and collaborate on sustainable farming initiatives.</p>
+                    <a href="#" class="btn btn-primary">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Upcoming Webinars and Workshops</h5>
+                    <p class="card-text">Participate in online courses, webinars, and workshops on integrating green energy technologies in agriculture.</p>
+                    <ul>
+                        <li>Organic Farming 101 - June 15, 2024</li>
+                        <li>Water Conservation Techniques - July 10, 2024</li>
+                        <li>Soil Health and Management - August 5, 2024</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">View All Events</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Latest Articles and Research</h5>
+                    <p class="card-text">Stay updated with the latest articles and research on sustainable farming practices.</p>
+                    <a href="#" class="btn btn-primary">Read Articles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Funding Opportunities</h5>
+                    <p class="card-text">Find information on grants, subsidies, and funding opportunities for green initiatives in agriculture.</p>
+                    <a href="#" class="btn btn-primary">Explore Funding</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #212529;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            height: 200px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            color: #343a40;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+}
+
+

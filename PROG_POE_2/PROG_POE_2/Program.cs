@@ -4,9 +4,20 @@ using PROG_POE_2.Areas.Identity.Data;
 using PROG_POE_2.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Set the data directory to the directory of the application's executable file
+AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
+
 var connectionString = builder.Configuration.GetConnectionString("Login_RegContextConnection") ?? throw new InvalidOperationException("Connection string 'Login_RegContextConnection' not found.");
 
-builder.Services.AddDbContext<Login_RegContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<Login_RegContext>(options =>
+    options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(30),
+            errorNumbersToAdd: null);
+    }));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false ).AddRoles<IdentityRole>().AddEntityFrameworkStores<Login_RegContext>();
 
@@ -44,6 +55,8 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 // Use the session middleware

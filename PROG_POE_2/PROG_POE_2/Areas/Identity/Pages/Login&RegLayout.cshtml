@@ -1,22 +1,26 @@
 ﻿@{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
+@inject SignInManager<ApplicationUser> SignInManager
 <div class="row justify-content-center">
     <div class="col-5 mt-5">
         <div class="card login-logout-card">
             <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Identity/Account/Login">
-                            Log In
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Identity/Account/Register">
-                            Register
-                        </a>
-                    </li>
-                </ul>
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Identity/Account/Login">
+                                Log In
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Identity/Account/Register">
+                                Register
+                            </a>
+                        </li>
+                    </ul>
+                }
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
@@ -27,6 +31,8 @@
             </div>
         </div>
     </div>
+</div>
+
 </div>
 
 @section Scripts {
@@ -40,6 +46,20 @@
                     $this.addClass('active');
                 }
             })
+
+            // Hide the "Register" tab when "Farmer" is selected
+            $('#farmer').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('.nav-tabs li a[href="/Identity/Account/Register"]').parent().hide();
+                }
+            });
+
+            // Show the "Register" tab when "Employee" is selected
+            $('#employee').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('.nav-tabs li a[href="/Identity/Account/Register"]').parent().show();
+                }
+            });
         })
     </script>
 }
