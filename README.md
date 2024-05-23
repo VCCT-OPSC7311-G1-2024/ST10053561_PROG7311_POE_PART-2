@@ -38,22 +38,22 @@ Select Build > Build Solution from the top menu.
 Select Run button at the top and press run.The application will open in your default web browser.
 
 3. System Functionalities and User Roles
--->User Authentication
+--> User Authentication
 -- Users can register and log in to the system. The system supports two roles: Employee and Farmer.
 
 4. Profile Management
 --> Employee: Can create, view, edit, and delete farmer profiles. Each profile includes information such as the farmer's name, location, and contact details.
--->Farmer: Can view and edit their own profile. They cannot create new profiles or delete existing ones.
+--> Farmer: Can view and edit their own profile. They cannot create new profiles or delete existing ones.
 
 Product Management
--->Employee: Can add, view, edit, and delete products. Each product includes information such as the product's name, price, and description.
+--> Employee: Can add, view, edit, and delete products. Each product includes information such as the product's name, price, and description.
 
 Data Persistence
--->All data is stored in a SQL Server database, ensuring that it is preserved between sessions.
+--> All data is stored in a SQL Server database, ensuring that it is preserved between sessions.
 
 User Roles Employee
--->Create, view, edit, and delete farmer profiles.
--->View the list of all farmer profiles.
+--> Create, view, edit, and delete farmer profiles.
+--> View the list of all farmer profiles.
 --> Manage products.
 
 User Roles Farmer
