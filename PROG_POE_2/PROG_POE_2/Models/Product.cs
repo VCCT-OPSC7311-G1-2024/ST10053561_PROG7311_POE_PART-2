@@ -4,6 +4,7 @@ using System.ComponentModel;
 
 namespace PROG_POE_2.Models
 {
+    // generating a Product Table
     public class Product
     {
         [Key]

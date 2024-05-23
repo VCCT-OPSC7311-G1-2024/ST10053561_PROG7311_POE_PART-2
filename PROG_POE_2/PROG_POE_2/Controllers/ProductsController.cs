@@ -19,9 +19,6 @@ namespace PROG_POE_2.Controllers
 		{
 			_context = context;
 		}
-
-
-
         // GET: Products
         public async Task<IActionResult> Display()
         {
@@ -93,7 +90,7 @@ namespace PROG_POE_2.Controllers
 
 
             // If model state is not valid, collect all errors
-            var errors = ModelState.SelectMany(x => x.Value.Errors.Select(e => e.ErrorMessage));
+            var errors = ModelState.SelectMany(x =>  x.Value.Errors.Select(e => e.ErrorMessage));
             foreach (var error in errors)
             {
                 ModelState.AddModelError("", error);
@@ -103,61 +100,86 @@ namespace PROG_POE_2.Controllers
         }
 
         // GET: Products/Edit/5
+        // This action method is responsible for handling the GET request to edit a product.
+        // It takes an optional product ID as a parameter.
+        // If no ID is provided, it returns a 404 error.
+        // If an ID is provided, it retrieves the product with that ID from the database.
+        // If no product with that ID exists, it returns a 404 error.
+        // If a product with that ID exists, it passes the product to the Edit view.
         public async Task<IActionResult> Edit(int? id)
-		{
-			if (id == null)
-			{
-				return NotFound();
-			}
+        {
+            // Check if the ID is null. If it is, return a 404 error.
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-			var product = await _context.Products.FindAsync(id);
-			if (product == null)
-			{
-				return NotFound();
-			}
-			return View(product);
-		}
+            // Retrieve the product with the specified ID from the database.
+            var product = await _context.Products.FindAsync(id);
+
+            // Check if the product exists. If it doesn't, return a 404 error.
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            // If the product exists, pass it to the Edit view.
+            return View(product);
+        }
+
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // This action method is responsible for handling the POST request to edit a product.
+        // It takes a product ID and a Product object as parameters.
+        // The Product object is bound to the posted form values.
+        // If the ID in the URL does not match the ID of the product, it returns a 404 error.
+        // If the model state is valid, it retrieves the existing product from the database and updates its properties.
+        // It then saves the changes to the database and redirects to the Display view.
+        // If the model state is not valid, it returns the Edit view with the current product.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Type,description,ProductionDate")] Product product)
         {
+            // Check if the ID in the URL matches the ID of the product. If not, return a 404 error.
             if (id != product.ProductID)
             {
                 return NotFound();
             }
 
+            // Check if the model state is valid.
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // Retrieve the existing product from the database.
                     var existingProduct = await _context.Products.FirstOrDefaultAsync(p => p.ProductID == id);
                     if (existingProduct == null)
                     {
                         return NotFound();
                     }
 
-                    // Retrieve the farmer's ID from the session
+                    // Retrieve the farmer's ID from the session.
                     var farmerId = HttpContext.Session.GetInt32("FarmerId");
                     if (!farmerId.HasValue)
                     {
-                        // Handle the case where the farmer is not logged in
+                        // If the farmer is not logged in, redirect to the login page.
                         return Redirect("/Identity/Account/Login");
                     }
 
+                    // Update the properties of the existing product.
                     existingProduct.Name = product.Name;
                     existingProduct.Type = product.Type;
                     existingProduct.description = product.description;
                     existingProduct.ProductionDate = product.ProductionDate;
                     existingProduct.FarmerID = farmerId.Value;
 
+                    // Save the changes to the database.
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    // If the product does not exist, return a 404 error.
+                    // Otherwise, rethrow the exception.
                     if (!ProductExists(product.ProductID))
                     {
                         return NotFound();
@@ -167,8 +189,12 @@ namespace PROG_POE_2.Controllers
                         throw;
                     }
                 }
+
+                // Redirect to the Display view.
                 return RedirectToAction(nameof(Display));
             }
+
+            // If the model state is not valid, return the Edit view with the current product.
             return View(product);
         }
 
@@ -191,24 +217,39 @@ namespace PROG_POE_2.Controllers
 			return View(product);
 		}
 
-		// POST: Products/Delete/5
-		[HttpPost, ActionName("Delete")]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> DeleteConfirmed(int id)
-		{
-			var product = await _context.Products.FindAsync(id);
-			if (product != null)
-			{
-				_context.Products.Remove(product);
-			}
+        // POST: Products/Delete/5
+        // This action method is responsible for handling the POST request to delete a product.
+        // It takes a product ID as a parameter.
+        // It retrieves the product with that ID from the database and removes it.
+        // It then saves the changes to the database and redirects to the Display view.
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            // Retrieve the product with the specified ID from the database.
+            var product = await _context.Products.FindAsync(id);
 
-			await _context.SaveChangesAsync();
-			return RedirectToAction(nameof(Display));
-		}
+            // If the product exists, remove it from the database.
+            if (product != null)
+            {
+                _context.Products.Remove(product);
+            }
 
-		private bool ProductExists(int id)
-		{
-			return _context.Products.Any(e => e.ProductID == id);
-		}
-	}
+            // Save the changes to the database.
+            await _context.SaveChangesAsync();
+
+            // Redirect to the Display view.
+            return RedirectToAction(nameof(Display));
+        }
+
+        // This helper method checks if a product with a specified ID exists in the database.
+        // It takes a product ID as a parameter and returns true if a product with that ID exists, false otherwise.
+        private bool ProductExists(int id)
+        {
+            // Check if any product in the database has the specified ID.
+            return _context.Products.Any(e => e.ProductID == id);
+        }
+
+
+    }
 }

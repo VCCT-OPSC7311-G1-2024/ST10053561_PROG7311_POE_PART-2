@@ -1,5 +1,9 @@
+/* Importing the Lato font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
 html {
     font-size: 14px;
+    font-family: 'Lato', sans-serif; /* Applying Lato font */
 }
 
 @media (min-width: 768px) {
@@ -9,11 +13,11 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem rgb(37, 204, 123); /* Light green focus color */
 }
 
 .navbar-nav .nav-link {
-    color: #343a40;
+    color: rgb(34, 47, 62); /* Dark gray text */
     font-weight: bold;
     padding: 10px 15px;
     transition: background-color 0.3s, box-shadow 0.3s;
@@ -22,21 +26,23 @@ html {
 }
 
     .navbar-nav .nav-link:hover {
-        background-color: #e9ecef;
+        background-color: rgb(220, 237, 200); /* Light green background */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
 .navbar-brand {
     font-weight: bold;
+    color: rgb(37, 204, 123); /* Green brand color */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 footer {
     text-align: center;
     padding: 10px 0;
+    background-color: rgba(0, 128, 0, 0.2); /* Light green background */
+    color: brown; /* Brown text */
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 html {
     position: relative;
@@ -45,28 +51,60 @@ html {
 
 body {
     margin-bottom: 60px;
-    font-family: Roboto,sans-serif;
+    font-family: 'Lato', sans-serif; /* Applying Lato font */
+    background-color: rgb(240, 255, 240); /* Honeydew background for body */
 }
 
 .login-logout-card .card-header {
     padding: 0px 0px 12px 0px;
+    background-color: rgb(220, 237, 200); /* Light green card header */
 }
 
 .login-logout-card ul.nav-tabs {
     margin: 0px 0px -12px 0px;
+    background-color: rgb(34, 139, 34); /* Forest green nav-tabs */
+    border-bottom: none;
 }
 
 .login-logout-card li.nav-item {
-    width: 50%
+    width: 50%;
 }
 
 .login-logout-card a.nav-link {
     font-size: 1rem;
-    color: #495057;
+    color: white; /* White text for nav links */
     text-align: center;
     padding: 1rem;
+    background-color: rgb(34, 139, 34); /* Forest green nav-link background */
+    border: 1px solid white; /* White border */
+    border-radius: 0; /* Remove border-radius */
 }
+
+    .login-logout-card a.nav-link:hover {
+        background-color: rgb(37, 204, 123); /* Brighter green on hover */
+    }
 
 .login-logout-card .card-body {
     padding: 10px 20px;
+    background-color: rgb(240, 255, 240); /* Honeydew card body */
 }
+
+/* Additional custom styles for a cohesive green theme */
+.card {
+    border: 1px solid rgb(34, 139, 34); /* Forest green card border */
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2); /* Green shadow */
+}
+
+.card-title {
+    color: rgb(34, 139, 34); /* Forest green card title */
+}
+
+.btn-primary {
+    background-color: rgb(34, 139, 34); /* Forest green button */
+    border-color: rgb(34, 139, 34); /* Matching border */
+}
+
+    .btn-primary:hover {
+        background-color: rgb(37, 204, 123); /* Brighter green button on hover */
+        border-color: rgb(37, 204, 123); /* Matching border */
+    }

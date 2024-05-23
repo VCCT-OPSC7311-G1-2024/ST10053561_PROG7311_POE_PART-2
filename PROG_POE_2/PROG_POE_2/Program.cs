@@ -10,6 +10,7 @@ AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDir
 
 var connectionString = builder.Configuration.GetConnectionString("Login_RegContextConnection") ?? throw new InvalidOperationException("Connection string 'Login_RegContextConnection' not found.");
 
+// Add services to the container.
 builder.Services.AddDbContext<Login_RegContext>(options =>
     options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
     {
