@@ -24,7 +24,11 @@ Download and install the latest version of Visual Studio from the Visual Studio 
 Right-click on the solution in Solution Explorer.
 Select "Restore NuGet Packages".
 
+
+
+
 Building and Running the Prototype
+
 1. Build the Project
 In Visual Studio:
 
