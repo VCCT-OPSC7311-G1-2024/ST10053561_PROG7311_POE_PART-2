@@ -8,34 +8,40 @@
 <h1 class="header">@ViewBag.FarmerUsername's Products</h1>
 
 
+@if (!Model.Any())
+{
+    <p>There are no products.</p>
+}
+else
+{
+    <div class="form-3d">
+        <form asp-action="ProductsByDate" method="get" class="row g-3">
+            <input type="hidden" name="id" value="@Model.First().FarmerID">
 
-<div class="form-3d">
-    <form asp-action="ProductsByDate" method="get" class="row g-3">
-        <input type="hidden" name="id" value="@Model.First().FarmerID">
+            <div class="col-md-6">
+                <label for="startDate" class="form-label">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" class="form-control shadow-input">
+            </div>
 
-        <div class="col-md-6">
-            <label for="startDate" class="form-label">Start Date:</label>
-            <input type="date" id="startDate" name="startDate" class="form-control shadow-input">
-        </div>
+            <div class="col-md-6">
+                <label for="endDate" class="form-label">End Date:</label>
+                <input type="date" id="endDate" name="endDate" class="form-control shadow-input">
+            </div>
 
-        <div class="col-md-6">
-            <label for="endDate" class="form-label">End Date:</label>
-            <input type="date" id="endDate" name="endDate" class="form-control shadow-input">
-        </div>
+            <div class="col-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary shadow-btn btn-sm me-2">Filter</button>
+                <a class="btn btn-secondary shadow-btn btn-sm" asp-action="AllProducts" asp-route-id="@Model.First().FarmerID">Show All</a>
+            </div>
+        </form>
+    </div>
 
-        <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary shadow-btn btn-sm me-2">Filter</button>
-            <a class="btn btn-secondary shadow-btn btn-sm" asp-action="AllProducts" asp-route-id="@Model.First().FarmerID">Show All</a>
-        </div>
-    </form>
-</div>
-
-@section Scripts {
+    @section Scripts {
     <script>
         document.getElementById('startDate').addEventListener('change', function () {
             document.getElementById('endDate').min = this.value;
         });
     </script>
+    }
 }
 
 
