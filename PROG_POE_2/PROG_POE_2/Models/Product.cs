@@ -30,5 +30,6 @@ namespace PROG_POE_2.Models
         public DateTime ProductionDate { get; set; }
 
         public int FarmerID { get; set; }
+
     }
 }

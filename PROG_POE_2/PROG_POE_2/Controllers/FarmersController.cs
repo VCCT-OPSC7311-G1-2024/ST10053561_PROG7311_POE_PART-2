@@ -63,10 +63,18 @@ namespace PROG_POE_2.Controllers
 
         // GET: Farmers/Display
         // This action method is responsible for displaying the list of farmers.
-        // It retrieves all farmers from the database and passes them to the view.
+        // It retrieves all farmers from the database that were created by the currently logged-in employee and passes them to the view.
         public async Task<IActionResult> Display()
         {
-            return View(await _context.Farmers.ToListAsync());
+            // Get the ID of the currently logged-in employee.
+            var userId = _userManager.GetUserId(User);
+
+            // Retrieve all farmers that were created by the currently logged-in employee.
+            var farmers = await _context.Farmers
+                .Where(f => f.EmployeeID == userId)
+                .ToListAsync();
+
+            return View(farmers);
         }
 
 

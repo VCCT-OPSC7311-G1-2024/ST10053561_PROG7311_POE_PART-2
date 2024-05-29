@@ -7,58 +7,6 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject Login_RegContext _context
 
-@* <ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            @{
-                var user = await UserManager.GetUserAsync(User);
-            }
-            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(user?.UserName ?? "User")!</a>
-        </li>
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-            </form>
-        </li>
-    }
-</ul> *@
-
-@* <ul class="navbar-nav">
-    @{
-        var farmerId = Context.Session.GetInt32("FarmerId");
-        var username = ViewData["Username"] as string;
-
-        if (farmerId.HasValue)
-        {
-            var farmer = _context.Farmers.FirstOrDefault(f => f.Id == farmerId.Value);
-            username = farmer != null ? farmer.Username : username;
-        }
-        else if (SignInManager.IsSignedIn(User))
-        {
-            var user = UserManager.GetUserAsync(User).GetAwaiter().GetResult();
-            username = user?.UserName;
-        }
-    }
-
-    @if (!string.IsNullOrEmpty(username))
-    {
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @username!</a>
-        </li>
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-            </form>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello User!</a>
-        </li>
-    }
-</ul> *@
 
 <ul class="navbar-nav">
     @{

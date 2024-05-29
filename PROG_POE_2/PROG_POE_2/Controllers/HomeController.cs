@@ -67,13 +67,23 @@ namespace PROG_POE_2.Controllers
             return View("FarmerProducts", products);
         }
 
-        // This action method is responsible for displaying a list of all farmers.
-        // It retrieves all farmers from the database and passes them to the view.
+
+
+        // This action method is responsible for displaying a list of farmers that were created by the currently logged-in employee.
+        // It retrieves these farmers from the database and passes them to the view.
         public async Task<IActionResult> SelectFarmer()
         {
-            var farmers = await _context.Farmers.ToListAsync();
+            // Get the ID of the currently logged-in user.
+            var userId = _userManager.GetUserId(User);
+
+            // Retrieve all farmers that were created by the currently logged-in user.
+            var farmers = await _context.Farmers
+                .Where(f => f.EmployeeID == userId)
+                .ToListAsync();
+
             return View(farmers);
         }
+
 
         // This action method is responsible for displaying the products of a specific farmer.
         // It takes a farmer ID as a parameter, retrieves all products of that farmer from the database,

@@ -45,6 +45,7 @@ namespace PROG_POE_2.Models
         [Column(TypeName = "nvarchar(450)")]
         public string EmployeeID { get; set; }
 
+
     }
 
 }

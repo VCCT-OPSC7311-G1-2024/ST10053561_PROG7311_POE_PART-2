@@ -273,7 +273,7 @@ namespace PROG_POE_2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Farmers");
+                    b.ToTable("Farmers", (string)null);
                 });
 
             modelBuilder.Entity("PROG_POE_2.Models.Product", b =>
@@ -304,7 +304,7 @@ namespace PROG_POE_2.Migrations
 
                     b.HasKey("ProductID");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
