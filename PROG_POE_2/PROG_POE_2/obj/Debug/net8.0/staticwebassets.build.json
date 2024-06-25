@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BuLpR2utrm+0Gu8/9n9msnVMtPRfXCUh60xiKsERYzY=",
+  "Hash": "e3ZLP6M/TVFIPZh8X6nyTa3HbXGdeZWnHxCG3Vp2m28=",
   "Source": "PROG_POE_2",
   "BasePath": "_content/PROG_POE_2",
   "Mode": "Default",
@@ -1307,6 +1307,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\Collaborate with Other Farmers.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\vicky\\OneDrive - ADvTECH Ltd\\Varsity college\\Third Year\\PROG7311\\POE\\Part 2\\ST10053561_PROG7311_POE_PART-2\\PROG_POE_2\\PROG_POE_2\\wwwroot\\Images\\Fruits.jpg",
+      "SourceId": "PROG_POE_2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vicky\\OneDrive - ADvTECH Ltd\\Varsity college\\Third Year\\PROG7311\\POE\\Part 2\\ST10053561_PROG7311_POE_PART-2\\PROG_POE_2\\PROG_POE_2\\wwwroot\\",
+      "BasePath": "_content/PROG_POE_2",
+      "RelativePath": "Images/Fruits.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Fruits.jpg"
     },
     {
       "Identity": "C:\\Users\\vicky\\OneDrive - ADvTECH Ltd\\Varsity college\\Third Year\\PROG7311\\POE\\Part 2\\ST10053561_PROG7311_POE_PART-2\\PROG_POE_2\\PROG_POE_2\\wwwroot\\Images\\Fruits.png",

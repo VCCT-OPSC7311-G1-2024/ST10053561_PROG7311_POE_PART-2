@@ -96,6 +96,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Collaborate with Other Farmers.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Fruits.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>PROG_POE_2</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/PROG_POE_2</BasePath>
+      <RelativePath>Images/Fruits.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Fruits.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Fruits.png))">
       <SourceType>Package</SourceType>
       <SourceId>PROG_POE_2</SourceId>
