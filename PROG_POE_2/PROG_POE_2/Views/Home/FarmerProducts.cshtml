@@ -7,14 +7,13 @@
 
 <h1 class="header">@ViewBag.FarmerUsername's Products</h1>
 
-
 @if (!Model.Any())
 {
     <p>There are no products, Please Request Farmer to Add Products</p>
 }
 else
 {
-    <div class="form-3d">
+    <div class="form-3d mb-4">
         <form asp-action="ProductsByDate" method="get" class="row g-3">
             <input type="hidden" name="id" value="@Model.First().FarmerID">
 
@@ -44,54 +43,46 @@ else
     }
 }
 
-
-
 <table class="table table-striped table-hover">
     <thead class="thead-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FarmerID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductionDate)
-            </th>
-
-            <th></th>
+            <th class="text-center">ID</th>
+            <th class="text-center">Product Image</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Type</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Production Date</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.FarmerID)
                 </td>
-                <td>
+                <td class="text-center">
+                    @if (item.Image != null)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)" alt="Product Image" class="product-image-icon">
+                    }
+                </td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.Type)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.description)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.ProductionDate)
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
 
 @section Styles {
     <style>
@@ -102,20 +93,35 @@ else
 
         .header {
             margin-bottom: 30px;
+            text-align: center;
         }
 
             .header h1 {
                 color: #343a40;
             }
 
+        .product-image-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         .table {
             margin-top: 20px;
         }
 
-            .table th {
-                background-color: #343a40;
-                color: #fff;
+            .table th,
+            .table td {
+                text-align: center;
+                vertical-align: middle;
             }
+
+        .thead-dark th {
+            background-color: #343a40;
+            color: #fff;
+        }
 
         .form-3d {
             background-color: #ffffff;
@@ -129,13 +135,17 @@ else
                 transform: translateY(-5px);
             }
 
-            .form-3d .form-control {
+            .form-3d .form-control,
+            .custom-file-input,
+            .custom-file-label {
                 border-radius: 5px;
                 border: 1px solid #ced4da;
                 box-shadow: none;
             }
 
-                .form-3d .form-control:focus {
+                .form-3d .form-control:focus,
+                .custom-file-input:focus,
+                .custom-file-label:focus {
                     border-color: #80bdff;
                     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
                 }
@@ -171,6 +181,30 @@ else
 
         .text-danger {
             color: #dc3545 !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem !important;
+        }
+
+        .mt-4 {
+            margin-top: 1.5rem !important;
+        }
+
+        .me-2 {
+            margin-right: 0.5rem !important;
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+
+        .justify-content-end {
+            justify-content: flex-end !important;
+        }
+
+        .text-center {
+            text-align: center !important;
         }
     </style>
 }

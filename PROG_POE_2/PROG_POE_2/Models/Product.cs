@@ -31,5 +31,8 @@ namespace PROG_POE_2.Models
 
         public int FarmerID { get; set; }
 
+        [DisplayName("Product Image")]
+        public byte[] Image { get; set; }
+
     }
 }

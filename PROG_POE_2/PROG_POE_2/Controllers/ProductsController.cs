@@ -8,17 +8,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PROG_POE_2.Data;
 using PROG_POE_2.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace PROG_POE_2.Controllers
 {
-	public class ProductsController : Controller
-	{
-		private readonly Login_RegContext _context;
+    public class ProductsController : Controller
+    {
+        private readonly Login_RegContext _context;
 
-		public ProductsController(Login_RegContext context)
-		{
-			_context = context;
-		}
+        public ProductsController(Login_RegContext context)
+        {
+            _context = context;
+        }
         // GET: Products
         public async Task<IActionResult> Display()
         {
@@ -38,59 +40,75 @@ namespace PROG_POE_2.Controllers
             return View(products);
         }
 
-    
+
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
-		{
-			if (id == null)
-			{
-				return NotFound();
-			}
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-			var product = await _context.Products
-				.FirstOrDefaultAsync(m => m.ProductID == id);
-			if (product == null)
-			{
-				return NotFound();
-			}
+            var product = await _context.Products
+                .FirstOrDefaultAsync(m => m.ProductID == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
 
-			return View(product);
-		}
+            return View(product);
+        }
 
-		// GET: Products/Create
-		public IActionResult Create()
-		{
-			return View();
-		}
+        // GET: Products/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Modify the Create action to include IFormFile parameter for the image
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Name,Type,description,ProductionDate,FarmerID")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductID,Name,Type,description,ProductionDate,FarmerID,Image")] Product product, IFormFile imageUpload)
         {
+            if (imageUpload == null || imageUpload.Length == 0)
+            {
+                ModelState.AddModelError("ImageUpload", "The Product Image field is required.");
+            }
+            else
+            {
+                // If there's an uploaded file, remove the Image property from ModelState validation
+                ModelState.Remove("Image");
+            }
+
             if (ModelState.IsValid)
             {
                 // Retrieve the farmer's ID from the session
                 var farmerId = HttpContext.Session.GetInt32("FarmerId");
                 if (!farmerId.HasValue)
                 {
-					// Handle the case where the farmer is not logged in
-					return Redirect("/Identity/Account/Login");
+                    // Handle the case where the farmer is not logged in
+                    return Redirect("/Identity/Account/Login");
                 }
 
                 // Assign the current farmer's ID to the FarmerID property of the product
                 product.FarmerID = farmerId.Value;
+
+                if (imageUpload != null && imageUpload.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await imageUpload.CopyToAsync(memoryStream);
+                        product.Image = memoryStream.ToArray();
+                    }
+                }
 
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Display));
             }
 
-
             // If model state is not valid, collect all errors
-            var errors = ModelState.SelectMany(x =>  x.Value.Errors.Select(e => e.ErrorMessage));
+            var errors = ModelState.SelectMany(x => x.Value.Errors.Select(e => e.ErrorMessage));
             foreach (var error in errors)
             {
                 ModelState.AddModelError("", error);
@@ -138,12 +156,23 @@ namespace PROG_POE_2.Controllers
         // If the model state is not valid, it returns the Edit view with the current product.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Type,description,ProductionDate")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Type,description,ProductionDate")] Product product, IFormFile imageUpload)
         {
+
             // Check if the ID in the URL matches the ID of the product. If not, return a 404 error.
             if (id != product.ProductID)
             {
                 return NotFound();
+            }
+
+            if (imageUpload == null || imageUpload.Length == 0)
+            {
+                ModelState.AddModelError("ImageUpload", "The Product Image field is required.");
+            }
+            else
+            {
+                // If there's an uploaded file, remove the Image property from ModelState validation
+                ModelState.Remove("Image");
             }
 
             // Check if the model state is valid.
@@ -173,6 +202,16 @@ namespace PROG_POE_2.Controllers
                     existingProduct.ProductionDate = product.ProductionDate;
                     existingProduct.FarmerID = farmerId.Value;
 
+
+                    if (imageUpload != null && imageUpload.Length > 0)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await imageUpload.CopyToAsync(memoryStream);
+                            existingProduct.Image = memoryStream.ToArray();
+                        }
+                    }
+
                     // Save the changes to the database.
                     await _context.SaveChangesAsync();
                 }
@@ -194,28 +233,36 @@ namespace PROG_POE_2.Controllers
                 return RedirectToAction(nameof(Display));
             }
 
+            // If model state is not valid, collect all errors
+            var errors = ModelState.SelectMany(x => x.Value.Errors.Select(e => e.ErrorMessage));
+            foreach (var error in errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+
             // If the model state is not valid, return the Edit view with the current product.
             return View(product);
         }
 
 
+
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
-		{
-			if (id == null)
-			{
-				return NotFound();
-			}
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-			var product = await _context.Products
-				.FirstOrDefaultAsync(m => m.ProductID == id);
-			if (product == null)
-			{
-				return NotFound();
-			}
+            var product = await _context.Products
+                .FirstOrDefaultAsync(m => m.ProductID == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
 
-			return View(product);
-		}
+            return View(product);
+        }
 
         // POST: Products/Delete/5
         // This action method is responsible for handling the POST request to delete a product.

@@ -9,54 +9,62 @@
     <a asp-action="Create" class="btn btn-primary btn-lg shadow-btn">Create New Product</a>
 </p>
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover table-bordered">
     <thead class="thead-dark">
-    <thead>
         <tr>
-            <th>
-                    @Html.DisplayNameFor(model => model.FarmerID)
+            <th class="text-center">
+               ID
             </th>
-            <th>
-                    @Html.DisplayNameFor(model => model.Name)
+            <th class="text-center">
+                Product Image
             </th>
-            <th>
-                    @Html.DisplayNameFor(model => model.Type)
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
-                    @Html.DisplayNameFor(model => model.description)
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Type)
             </th>
-            <th>
-                    @Html.DisplayNameFor(model => model.ProductionDate)
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.description)
             </th>
-            <th></th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ProductionDate)
+            </th>
+            <th class="text-center"></th>
         </tr>
     </thead>
     <tbody>
-            @foreach (var item in Model)
-            {
+        @foreach (var item in Model)
+        {
             <tr>
-                <td>
-                        @Html.DisplayFor(modelItem => item.FarmerID)
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.FarmerID)
                 </td>
-                <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                <td class="text-center">
+                    @if (item.Image != null)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)" alt="Product Image" class="product-image-icon">
+                    }
                 </td>
-                <td>
-                        @Html.DisplayFor(modelItem => item.Type)
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
-                        @Html.DisplayFor(modelItem => item.description)
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Type)
                 </td>
-                <td>
-                        @Html.DisplayFor(modelItem => item.ProductionDate)
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.description)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-warning btn-sm shadow-btn">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-info btn-sm shadow-btn">Details</a> |
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.ProductionDate)
+                </td>
+                <td class="text-center action-buttons">
+                    <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-warning btn-sm shadow-btn">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-info btn-sm shadow-btn">Details</a>
                     <a asp-action="Delete" asp-route-id="@item.ProductID" class="btn btn-danger btn-sm shadow-btn">Delete</a>
                 </td>
             </tr>
-            }
+        }
     </tbody>
 </table>
 
@@ -69,6 +77,7 @@
 
         .header {
             margin-bottom: 30px;
+            text-align: center;
         }
 
             .header h1 {
@@ -79,42 +88,24 @@
             margin-top: 20px;
         }
 
-            .table th {
-                background-color: #343a40;
-                color: #fff;
+            .table th,
+            .table td {
+                text-align: center;
+                vertical-align: middle;
             }
 
-        .form-3d {
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            transition: transform 0.3s;
+        .thead-dark th {
+            background-color: #343a40;
+            color: #fff;
         }
 
-            .form-3d:hover {
-                transform: translateY(-5px);
-            }
-
-            .form-3d .form-control {
-                border-radius: 5px;
-                border: 1px solid #ced4da;
-                box-shadow: none;
-            }
-
-                .form-3d .form-control:focus {
-                    border-color: #80bdff;
-                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-                }
-
-        .shadow-input {
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
-            transition: box-shadow 0.3s;
+        .product-image-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-            .shadow-input:focus {
-                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.2);
-            }
 
         .btn-lg {
             padding: 10px 20px;
@@ -139,5 +130,25 @@
         .text-danger {
             color: #dc3545 !important;
         }
+
+        .thead-dark th {
+            border: 1px solid #454d55;
+        }
+
+        .table-bordered td, .table-bordered th {
+            border: none;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .action-buttons {
+            white-space: nowrap;
+        }
+
+            .action-buttons a {
+                margin-right: 5px;
+            }
     </style>
 }

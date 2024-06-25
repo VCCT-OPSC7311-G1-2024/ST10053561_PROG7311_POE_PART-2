@@ -11,8 +11,15 @@
 <div class="row">
     <div class="col-md-6 offset-md-3">
         <div class="form-3d">
-            <form asp-action="Create">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <div class="form-group">
+                    <label for="ImageUpload" class="control-label font-weight-bold">Product Image</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input shadow-input" id="ImageUpload" name="ImageUpload">
+                        <label class="custom-file-label shadow-input" for="ImageUpload">Choose file</label>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label asp-for="Name" class="control-label font-weight-bold"></label>
                     <input asp-for="Name" class="form-control shadow-input" />
@@ -46,6 +53,20 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var fileInput = document.getElementById("ImageUpload");
+            var fileInputLabel = document.querySelector("label[for='ImageUpload']");
+
+            fileInput.addEventListener("change", function () {
+                var fileName = fileInput.files[0].name;
+                fileInputLabel.textContent = fileName;
+
+                // Add a class for fancy styling
+                fileInputLabel.classList.add("selected");
+            });
+        });
+    </script>
 }
 
 @section Styles {
@@ -94,6 +115,53 @@
 
             .shadow-input:focus {
                 box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+        .custom-file {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            margin-bottom: 1rem;
+        }
+
+        .custom-file-input {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            margin: 0;
+            opacity: 0;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s;
+        }
+
+            .custom-file-input:focus {
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+        .custom-file-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: box-shadow 0.3s, background-color 0.3s, color 0.3s;
+        }
+
+            .custom-file-label.selected {
+                background-color: #d4edda;
+                color: #155724;
+                border-color: #c3e6cb;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
         .btn-lg {
